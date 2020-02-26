@@ -8,6 +8,7 @@
 
 ### Setup
 - install the needed Dependencies NET and use npm START/NODEMON to run it 
+- Use node to run all three files ( server,logger,app)
 
 #### `.env` requirements
 - `PORT` - Port Number
@@ -15,12 +16,10 @@
 
 #### How to initialize/run your application 
 - `npm run test`
-- `nodemon`
 - `npm run lint` 
 
 #### Tests
 - npm run test
-- nodemon  
 - npm run lint 
 
 #### UML

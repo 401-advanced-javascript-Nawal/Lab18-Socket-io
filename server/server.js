@@ -2,16 +2,16 @@
 
 // server listening on port # 3000 by using socket.io
 const sio = require('socket.io')(3000);
-// const socket = sio.connect('http://localhost:3000/school');
+// new namespace for school
+const school = sio.of('/school');
 
 // make a connection
 sio.on('connection', (socket) => {
   console.log('connection', socket.id);
 });
 
-// new namespace for school
-const school = sio.of('/school');
-
+/************************************************** school *****************************************************/
+// make a connection for school 
 school.on('connection', (socket) => {
   console.log('SCHOOL', socket.id);
 
@@ -21,12 +21,13 @@ school.on('connection', (socket) => {
     socket.join(room);
   });
 
-  school.on('submission ', payload => {
+  // lab requirment
+  socket.on('submission ', payload => {
     // send submission
     school.to('teacher').emit('submission' , payload);
   });
 
-  school.on('graded', room => {
+  socket.on('graded', payload => {
     //send grade
     school.to('student').emit('graded' , payload); 
   });
