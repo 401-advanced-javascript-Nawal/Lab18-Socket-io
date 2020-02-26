@@ -4,8 +4,9 @@
   "description": "### Author: Nawal Suliman",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+    "start": "node index.js",
+    "lint": "eslint **/*.js"
+    },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/401-advanced-javascript-Nawal/Lab18-Socket-io.git"
@@ -16,5 +17,11 @@
   "bugs": {
     "url": "https://github.com/401-advanced-javascript-Nawal/Lab18-Socket-io/issues"
   },
-  "homepage": "https://github.com/401-advanced-javascript-Nawal/Lab18-Socket-io#readme"
+  "homepage": "https://github.com/401-advanced-javascript-Nawal/Lab18-Socket-io#readme",
+  "dependencies": {
+    "eslint": "^6.8.0",
+    "jest": "^25.1.0",
+    "socket.io": "^2.3.0",
+    "socket.io-client": "^2.3.0"
+  }
 }
