@@ -1,40 +1,34 @@
 'use strict';
 
-const io = require('socket.io')(3000);
+// server listening on port # 3000 by using socket.io
+const sio = require('socket.io')(3000);
+// const socket = sio.connect('http://localhost:3000/school');
 
-// Core Demo -- basic operations
-io.on('connection', (socket) => {
-  console.log('CORE', socket.id);
-  socket.on('speak', (payload) => {
-    io.emit('message', payload);
-  });
+// make a connection
+sio.on('connection', (socket) => {
+  console.log('connection', socket.id);
 });
 
-// Built after the core demo, to show namespaces and rooms
+// new namespace for school
+const school = sio.of('/school');
 
-
-const school = io.of('/school');
 school.on('connection', (socket) => {
   console.log('SCHOOL', socket.id);
-  socket.on('speak', (payload) => {
-    school.emit('message', payload);
-  });
 
-  socket.on('challenge', (payload) => {
-    school.to('codefellows').emit('challenge', payload);
-  });
-
-  socket.on('join', room => {
+  // to be able to join to the room 
+  school.on('join', room => {
     console.log('joined', room);
     socket.join(room);
   });
 
-});
-
-const home = io.of('/home');
-home.on('connection', (socket) => {
-  console.log('HOME', socket.id);
-  socket.on('speak', (payload) => {
-    home.emit('message', payload);
+  school.on('submission ', payload => {
+    // send submission
+    school.to('teacher').emit('submission' , payload);
   });
-});
+
+  school.on('graded', room => {
+    //send grade
+    school.to('student').emit('graded' , payload); 
+  });
+
+}); // end of school namespace
